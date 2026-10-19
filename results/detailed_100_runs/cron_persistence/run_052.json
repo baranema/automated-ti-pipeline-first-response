@@ -1,0 +1,11 @@
+{
+  "run": 52,
+  "scenario": "cron_persistence",
+  "ts": "2026-06-25T09:43:52.313095",
+  "total_s": 7.517,
+  "ansible_s": 5.658,
+  "rc": 0,
+  "detection_s": 1.076,
+  "response_s": 6.441,
+  "integrator_s": 0.783
+}

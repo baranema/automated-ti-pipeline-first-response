@@ -1,0 +1,58 @@
+# a tiny rulebook that says "when this kind of alert arrives, do this thing."
+
+- name: port_scan
+  match:
+    rule.id: ["100501"]
+  action:
+    playbook: block_ip.yml
+    params:
+      target: "{{ data.srcip }}"
+
+- name: ssh_brute_force
+  # 5712: sshd brute force (many separate failed-password events)
+  # 5758: sshd max auth attempts exceeded (hydra-style; many attempts per
+  #       connection get aggregated into this one alert by Wazuh)
+  match:
+    rule.id: ["5712", "5758"]
+  action:
+    playbook: block_ip.yml
+    params:
+      target: "{{ data.srcip }}"
+
+- name: cron_persistence
+  # 100510: new file added under /etc/cron.d/ (FIM alert escalated)
+  match:
+    rule.id: ["100510"]
+  action:
+    playbook: remove_persistence.yml
+    params:
+      target_file: "{{ syscheck.path }}"
+      target_host: "{{ agent.name }}"
+
+- name: reverse_shell
+  # 100520: bash with active network connection (command monitoring)
+  match:
+    rule.id: ["100520"]
+  action:
+    playbook: kill_process.yml
+    params:
+      target_host: "{{ agent.name }}"
+
+- name: base64_exec
+  # 100300: bash with base64 decoding detected via auditd (sigma-converted)
+  match:
+    rule.id: ["100300"]
+  action:
+    playbook: kill_process.yml
+    params:
+      target_host: "{{ agent.name }}"
+
+- name: web_shell
+  # 100530: executable file added to Apache web root (FIM alert)
+  match:
+    rule.id: ["100530"]
+  action:
+    playbook: quarantine_file.yml
+    params:
+      target_file: "{{ syscheck.path }}"
+      target_host: "{{ agent.name }}"

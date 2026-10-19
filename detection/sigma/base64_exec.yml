@@ -1,0 +1,26 @@
+title: Bash Base64 Decoding Execution
+id: 7e2b9f4a-1c3d-4a8e-9b21-0f6a2c5d8e10
+status: experimental
+description: >
+  Detects a bash process whose command line contains 'base64', indicating an
+  encoded shell payload being decoded and run (MITRE T1059.004). Used in this
+  project as the worked example of a vendor-neutral detection authored once in
+  Sigma and converted to multiple SIEM query languages.
+references:
+  - https://attack.mitre.org/techniques/T1059/004/
+author: thesis
+date: 2026/06/07
+logsource:
+  category: process_creation
+  product: linux
+detection:
+  selection:
+    Image|endswith: '/bash'
+    CommandLine|contains: 'base64'
+  condition: selection
+falsepositives:
+  - Legitimate administrative use of base64 inside a shell command
+level: high
+tags:
+  - attack.execution
+  - attack.t1059.004

@@ -1,0 +1,7 @@
+# IPs the pipeline must never block.
+allowed_srcips:
+  - <OPERATOR_IP> # operator machine (set to your own IP)
+  - 10.0.0.116 # controller/wazuh manager
+  - 10.1.1.56 # endpoint-workstation
+  - 10.1.1.62 # endpoint-webserver
+  - 10.1.1.63 # endpoint-dbserver

@@ -1,0 +1,18 @@
+---
+# Kill reverse shells on one host: bash processes holding an ESTABLISHED TCP
+# connection (found via ss), plus their children. Var: target_host
+- name: Kill reverse shell on {{ target_host }}
+  hosts: "{{ target_host }}"
+  gather_facts: false
+  tasks:
+    - name: Find and kill bash processes with network connections
+      ansible.builtin.shell: |
+        killed=""
+        for pid in $(ss -tnp state established | grep '"bash"' | grep -oP 'pid=\K\d+'); do
+          pkill -9 -P "$pid" 2>/dev/null || true
+          kill -9 "$pid" 2>/dev/null || true
+          killed="$killed $pid"
+        done
+        echo "killed:$killed"
+      register: kill_result
+      changed_when: "kill_result.stdout | trim != 'killed:'"

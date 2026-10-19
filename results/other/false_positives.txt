@@ -1,0 +1,8 @@
+N1 | PASS | A | SSH login (correct password)
+N2 | PASS | B | 15 connections in 20s
+N4 | PASS | C | Legitimate base64 usage | triggered: base64_exec:kill_process.yml
+N5 | PASS | A | Bash with no network
+N7 | PASS | C | Legitimate HTML in web root | triggered: web_shell:quarantine_file.yml
+N8 | PASS | C | Legitimate cron job | triggered: cron_persistence:remove_persistence.yml
+N9 | PASS | B | 5 SSH connections in 20s
+N10 | PASS | A | SSH port-forward (TCP owned by ssh/sshd, not bash)

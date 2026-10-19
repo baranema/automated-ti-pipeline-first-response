@@ -1,0 +1,26 @@
+---
+# Add Wazuh command monitoring on every endpoint: every 5s, flag a bash process
+# holding an established TCP connection (reverse shell). Idempotent (markered block).
+- name: Enable reverse shell detection on all endpoints
+  hosts: endpoints
+  gather_facts: false
+  tasks:
+    - name: Add reverse shell command monitoring to ossec.conf
+      ansible.builtin.blockinfile:
+        path: /var/ossec/etc/ossec.conf
+        marker: "<!-- {mark} ti-pipeline reverse shell detection -->"
+        insertbefore: "</ossec_config>"
+        block: |
+          <localfile>
+            <log_format>full_command</log_format>
+            <command>ss -tnp state established | grep -v grep | grep bash || true</command>
+            <alias>check-reverse-shell</alias>
+            <frequency>5</frequency>
+          </localfile>
+      notify: restart wazuh-agent
+
+  handlers:
+    - name: restart wazuh-agent
+      ansible.builtin.service:
+        name: wazuh-agent
+        state: restarted

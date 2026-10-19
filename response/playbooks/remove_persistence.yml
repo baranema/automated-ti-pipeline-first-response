@@ -1,0 +1,24 @@
+---
+# Remove a cron persistence file, then restart cron to drop any cached job.
+# Refuses paths outside /etc/cron.d/ and /var/spool/cron/.
+# Vars: target_file, target_host
+- name: Remove persistence artifact {{ target_file }}
+  hosts: "{{ target_host }}"
+  gather_facts: false
+  tasks:
+    - name: Validate target path is under a known persistence directory
+      ansible.builtin.assert:
+        that:
+          - target_file is match("^/etc/cron\\.d/")
+            or target_file is match("^/var/spool/cron/")
+        fail_msg: "Refusing to delete {{ target_file }} - not a known persistence path"
+
+    - name: Delete the persistence artifact
+      ansible.builtin.file:
+        path: "{{ target_file }}"
+        state: absent
+
+    - name: Restart cron to clear any cached job
+      ansible.builtin.service:
+        name: cron
+        state: restarted

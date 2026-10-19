@@ -1,0 +1,11 @@
+{
+  "run": 96,
+  "scenario": "base64_exec",
+  "ts": "2026-06-25T00:59:50.269689",
+  "total_s": 7.166,
+  "ansible_s": 2.577,
+  "rc": 0,
+  "detection_s": 3.989,
+  "response_s": 3.177,
+  "integrator_s": 0.6
+}

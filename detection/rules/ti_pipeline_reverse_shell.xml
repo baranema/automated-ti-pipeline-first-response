@@ -1,0 +1,14 @@
+<!-- Reverse shell (T1059.004): bash holding an active network connection. -->
+<group name="local,ti_pipeline,execution,">
+
+  <!-- Command monitoring runs 'ss -tnp' every 5s (rule 530); fire when its
+       output shows a bash process with a live TCP connection. -->
+  <rule id="100520" level="10" ignore="30">
+    <if_sid>530</if_sid>
+    <match>check-reverse-shell</match>
+    <regex>"bash"</regex>
+    <description>Reverse shell detected: bash with active network connection</description>
+    <group>execution,attack.t1059.004,</group>
+  </rule>
+
+</group>

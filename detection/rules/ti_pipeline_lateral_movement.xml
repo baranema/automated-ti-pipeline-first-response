@@ -1,0 +1,37 @@
+<!-- SSH lateral movement (T1021.004). Detection only: these rules raise an alert
+     but are intentionally not mapped to a response in alert_actions.yml. They are
+     the "recognised but not yet answered" future-work hook from the report.
+     One rule per private range, since the SSH source decides which one matches. -->
+<group name="local,ti_pipeline,lateral_movement,">
+
+  <rule id="100320" level="8">
+    <if_sid>5715</if_sid>
+    <srcip>10.0.0.0/8</srcip>
+    <description>T1021.004: SSH from 10.0.0.0/8 (lateral movement)</description>
+    <mitre>
+      <id>T1021.004</id>
+    </mitre>
+    <group>lateral_movement,attack.t1021_004,</group>
+  </rule>
+
+  <rule id="100321" level="8">
+    <if_sid>5715</if_sid>
+    <srcip>172.16.0.0/12</srcip>
+    <description>T1021.004: SSH from 172.16.0.0/12 (lateral movement)</description>
+    <mitre>
+      <id>T1021.004</id>
+    </mitre>
+    <group>lateral_movement,attack.t1021_004,</group>
+  </rule>
+
+  <rule id="100322" level="8">
+    <if_sid>5715</if_sid>
+    <srcip>192.168.0.0/16</srcip>
+    <description>T1021.004: SSH from 192.168.0.0/16 (lateral movement)</description>
+    <mitre>
+      <id>T1021.004</id>
+    </mitre>
+    <group>lateral_movement,attack.t1021_004,</group>
+  </rule>
+
+</group>

@@ -1,0 +1,18 @@
+---
+# The three protected endpoints, reachable from the controller over the /24.
+all:
+  children:
+    endpoints:
+      hosts:
+        endpoint-workstation:
+          ansible_host: 10.1.1.56
+        endpoint-webserver:
+          ansible_host: 10.1.1.62
+        endpoint-dbserver:
+          ansible_host: 10.1.1.63
+      vars:
+        ansible_user: tipipeline
+        ansible_ssh_private_key_file: /opt/automated-ti-pipeline/runtime/.ssh/id_ed25519
+        ansible_become: true
+        ansible_become_method: sudo
+        ansible_python_interpreter: /usr/bin/python3

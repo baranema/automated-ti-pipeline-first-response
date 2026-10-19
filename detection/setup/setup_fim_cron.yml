@@ -1,0 +1,21 @@
+---
+# Enable Wazuh realtime FIM on /etc/cron.d across all endpoints (cron
+# persistence detection). Idempotent: restarts the agent only when the line
+# is actually added.
+- name: Enable FIM on /etc/cron.d across all endpoints
+  hosts: endpoints
+  gather_facts: false
+  tasks:
+    - name: Add /etc/cron.d to syscheck in ossec.conf
+      ansible.builtin.lineinfile:
+        path: /var/ossec/etc/ossec.conf
+        insertafter: "<syscheck>"
+        line: "    <directories realtime=\"yes\">/etc/cron.d</directories>"
+        state: present
+      notify: restart wazuh-agent
+
+  handlers:
+    - name: restart wazuh-agent
+      ansible.builtin.service:
+        name: wazuh-agent
+        state: restarted

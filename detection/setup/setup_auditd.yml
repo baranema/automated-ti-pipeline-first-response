@@ -1,0 +1,41 @@
+---
+# Install auditd with execve logging on every endpoint and point the Wazuh
+# agent at the audit log (enables command-execution detection). Idempotent.
+- name: Set up auditd and Wazuh audit integration on all endpoints
+  hosts: endpoints
+  gather_facts: false
+  tasks:
+    - name: Install auditd
+      ansible.builtin.apt:
+        name: auditd
+        state: present
+        update_cache: true
+
+    - name: Deploy audit rules for execve monitoring
+      ansible.builtin.copy:
+        dest: /etc/audit/rules.d/wazuh.rules
+        mode: "0640"
+        content: |
+          ## Log all command executions for Wazuh analysis.
+          -a exit,always -F arch=b64 -S execve -k audit-wazuh-c
+          -a exit,always -F arch=b32 -S execve -k audit-wazuh-c
+      notify: restart auditd
+
+    - name: Ensure Wazuh agent reads audit log
+      ansible.builtin.lineinfile:
+        path: /var/ossec/etc/ossec.conf
+        insertafter: "<ossec_config>"
+        line: "  <localfile><log_format>audit</log_format><location>/var/log/audit/audit.log</location></localfile>"
+        state: present
+      notify: restart wazuh-agent
+
+  handlers:
+    - name: restart auditd
+      ansible.builtin.service:
+        name: auditd
+        state: restarted
+
+    - name: restart wazuh-agent
+      ansible.builtin.service:
+        name: wazuh-agent
+        state: restarted

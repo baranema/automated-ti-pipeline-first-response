@@ -1,0 +1,11 @@
+{
+  "run": 81,
+  "scenario": "ssh_brute_force",
+  "ts": "2026-06-25T20:44:15.166297",
+  "total_s": 35.098,
+  "ansible_s": 3.741,
+  "rc": 0,
+  "detection_s": 30.381,
+  "response_s": 4.716,
+  "integrator_s": 0.975
+}

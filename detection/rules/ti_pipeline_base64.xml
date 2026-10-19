@@ -1,0 +1,17 @@
+<!-- Base64-encoded execution (T1059.004): the Wazuh form of the vendor-neutral
+     ../sigma/base64_exec.yml. Our worked example of one rule in two languages. -->
+<group name="ti_pipeline,execution,attack,">
+
+  <!-- Fire on an auditd execve (rule 80700) where bash decodes base64. Also matches
+       the hex form 626173653634, because auditd hex-encodes args containing pipes. -->
+  <rule id="100300" level="10">
+    <if_sid>80700</if_sid>
+    <regex type="pcre2">comm="bash".+(base64|626173653634)</regex>
+    <description>T1059.004: bash with base64 decoding</description>
+    <mitre>
+      <id>T1059.004</id>
+    </mitre>
+    <group>execution,attack.t1059_004,</group>
+  </rule>
+
+</group>

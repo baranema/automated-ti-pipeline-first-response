@@ -1,0 +1,11 @@
+{
+  "run": 33,
+  "scenario": "reverse_shell",
+  "ts": "2026-06-25T01:23:57.067222",
+  "total_s": 11.503,
+  "ansible_s": 2.521,
+  "rc": 0,
+  "detection_s": 7.453,
+  "response_s": 4.05,
+  "integrator_s": 1.529
+}

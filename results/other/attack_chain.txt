@@ -1,0 +1,12 @@
+1 port_scan T1046 100501 block_ip.yml 7.192 yes OK
+1 ssh_brute_force T1110.001 5758 block_ip.yml 33.574 yes OK
+1 reverse_shell T1059.004 100520 kill_process.yml 6.223 yes OK
+1 cron_persistence T1053.003 100510 remove_persistence.yml 9.827 yes OK
+2 port_scan T1046 100501 block_ip.yml 6.717 yes OK
+2 ssh_brute_force T1110.001 5758 block_ip.yml 33.849 yes OK
+2 reverse_shell T1059.004 100520 kill_process.yml 4.859 yes OK
+2 cron_persistence T1053.003 100510 remove_persistence.yml 8.149 yes OK
+3 port_scan T1046 100501 block_ip.yml 8.183 yes OK
+3 ssh_brute_force T1110.001 5758 block_ip.yml 31.415 yes OK
+3 reverse_shell T1059.004 100520 kill_process.yml 5.524 yes OK
+3 cron_persistence T1053.003 100510 remove_persistence.yml 7.974 yes OK

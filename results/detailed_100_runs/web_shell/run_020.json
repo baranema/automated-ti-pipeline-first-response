@@ -1,0 +1,11 @@
+{
+  "run": 20,
+  "scenario": "web_shell",
+  "ts": "2026-06-24T23:03:06.661722",
+  "total_s": 6.597,
+  "ansible_s": 3.815,
+  "rc": 0,
+  "detection_s": 1.245,
+  "response_s": 5.352,
+  "integrator_s": 1.537
+}

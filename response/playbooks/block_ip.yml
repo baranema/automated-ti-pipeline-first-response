@@ -1,0 +1,24 @@
+---
+# Block an IP fleet-wide: insert INPUT + OUTPUT DROP rules on every endpoint.
+# Inserted at the top of the chain so blocked traffic is dropped before the LOG
+# rule fires, which stops Wazuh re-alerting on an already-blocked source.
+# Idempotent (iptables skips a rule that already exists). Var: target
+- name: Block IP {{ target }} on every endpoint
+  hosts: endpoints
+  gather_facts: false
+  tasks:
+    - name: Drop INPUT from {{ target }}
+      ansible.builtin.iptables:
+        chain: INPUT
+        source: "{{ target }}"
+        jump: DROP
+        action: insert
+        comment: "ti-pipeline"
+
+    - name: Drop OUTPUT to {{ target }}
+      ansible.builtin.iptables:
+        chain: OUTPUT
+        destination: "{{ target }}"
+        jump: DROP
+        action: insert
+        comment: "ti-pipeline"

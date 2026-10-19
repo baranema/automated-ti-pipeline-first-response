@@ -1,0 +1,59 @@
+{
+  "ip_count": 120,
+  "sweep": [
+    {
+      "rate_per_s": 0.1,
+      "sent": 20,
+      "completed": 20,
+      "completion": 1.0,
+      "mean_latency_s": 3.702,
+      "p95_latency_s": 3.946,
+      "max_latency_s": 6.07
+    },
+    {
+      "rate_per_s": 0.25,
+      "sent": 20,
+      "completed": 20,
+      "completion": 1.0,
+      "mean_latency_s": 3.587,
+      "p95_latency_s": 3.85,
+      "max_latency_s": 3.857
+    },
+    {
+      "rate_per_s": 0.5,
+      "sent": 20,
+      "completed": 20,
+      "completion": 1.0,
+      "mean_latency_s": 4.582,
+      "p95_latency_s": 4.914,
+      "max_latency_s": 5.003
+    },
+    {
+      "rate_per_s": 1.0,
+      "sent": 20,
+      "completed": 20,
+      "completion": 1.0,
+      "mean_latency_s": 23.098,
+      "p95_latency_s": 31.889,
+      "max_latency_s": 32.111
+    },
+    {
+      "rate_per_s": 2.0,
+      "sent": 20,
+      "completed": 20,
+      "completion": 1.0,
+      "mean_latency_s": 29.206,
+      "p95_latency_s": 36.256,
+      "max_latency_s": 36.336
+    },
+    {
+      "rate_per_s": 4.0,
+      "sent": 20,
+      "completed": 20,
+      "completion": 1.0,
+      "mean_latency_s": 36.578,
+      "p95_latency_s": 43.53,
+      "max_latency_s": 44.098
+    }
+  ]
+}

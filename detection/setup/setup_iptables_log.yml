@@ -1,0 +1,16 @@
+---
+# Log every NEW inbound TCP connection on each endpoint with a "TI-PIPELINE-NEW:"
+# prefix; the Wazuh manager aggregates these into a port-scan alert. Idempotent.
+- name: Setup iptables LOG rule for port-scan detection
+  hosts: endpoints
+  gather_facts: false
+  tasks:
+    - name: Log every NEW incoming TCP connection
+      ansible.builtin.iptables:
+        chain: INPUT
+        protocol: tcp
+        ctstate: NEW
+        jump: LOG
+        log_prefix: "TI-PIPELINE-NEW: "
+        log_level: '4'
+        comment: ti-pipeline-log

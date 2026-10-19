@@ -1,0 +1,22 @@
+---
+# Reverse of block_ip: remove the INPUT + OUTPUT DROP rules for an IP on every
+# endpoint (resets lab state between tests). Idempotent. Var: target
+- name: Unblock IP {{ target }} on every endpoint
+  hosts: endpoints
+  gather_facts: false
+  tasks:
+    - name: Remove INPUT DROP for {{ target }}
+      ansible.builtin.iptables:
+        chain: INPUT
+        source: "{{ target }}"
+        jump: DROP
+        state: absent
+        comment: "ti-pipeline"
+
+    - name: Remove OUTPUT DROP for {{ target }}
+      ansible.builtin.iptables:
+        chain: OUTPUT
+        destination: "{{ target }}"
+        jump: DROP
+        state: absent
+        comment: "ti-pipeline"

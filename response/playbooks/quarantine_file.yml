@@ -1,0 +1,28 @@
+---
+# Quarantine a web-root file: move it (timestamped) to /var/quarantine instead
+# of deleting, so it survives for forensics. Refuses paths outside
+# /var/www/html/. Vars: target_file, target_host
+- name: Quarantine {{ target_file }} on {{ target_host }}
+  hosts: "{{ target_host }}"
+  gather_facts: false
+  tasks:
+    - name: Verify file is in web root
+      ansible.builtin.assert:
+        that:
+          - target_file is match('^/var/www/html/')
+        fail_msg: "Refusing to quarantine file outside /var/www/html/"
+
+    - name: Create quarantine directory
+      ansible.builtin.file:
+        path: /var/quarantine
+        state: directory
+        mode: "0700"
+        owner: root
+        group: root
+
+    - name: Move file to quarantine
+      ansible.builtin.shell: |
+        mv "{{ target_file }}" \
+          "/var/quarantine/$(date +%Y%m%d_%H%M%S)_{{ target_file | basename }}"
+      args:
+        removes: "{{ target_file }}"

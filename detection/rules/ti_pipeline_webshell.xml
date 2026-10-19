@@ -1,0 +1,15 @@
+<!-- Web shell upload (T1505.003): a new file added to the Apache web root,
+     caught by FIM via Wazuh rule 554. -->
+<group name="local,ti_pipeline,webshell,">
+
+  <rule id="100530" level="12">
+    <if_sid>554</if_sid>
+    <field name="file">/var/www/html/</field>
+    <description>T1505.003: file added to web root</description>
+    <mitre>
+      <id>T1505.003</id>
+    </mitre>
+    <group>persistence,attack.t1505_003,</group>
+  </rule>
+
+</group>

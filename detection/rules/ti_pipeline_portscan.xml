@@ -1,0 +1,19 @@
+<!-- Port scan (T1046) from the iptables connection log. -->
+<group name="local,ti_pipeline,iptables_log,">
+
+  <!-- One low-level alert per new connection iptables logs. -->
+  <rule id="100500" level="3">
+    <if_sid>4100</if_sid>
+    <action>TI-PIPELINE-NEW:</action>
+    <description>iptables NEW connection (ti-pipeline)</description>
+  </rule>
+
+  <!-- Escalate when one source opens 20+ new connections within 20s. -->
+  <rule id="100501" level="10" frequency="20" timeframe="20" ignore="60">
+    <if_matched_sid>100500</if_matched_sid>
+    <same_source_ip />
+    <description>Port scan suspected: 20+ NEW connections from same source IP in 20s</description>
+    <group>portscan,attack.t1046,</group>
+  </rule>
+
+</group>

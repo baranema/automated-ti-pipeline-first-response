@@ -1,0 +1,74 @@
+{
+  "overall": {
+    "TP": 60,
+    "FP": 30,
+    "FN": 0,
+    "TN": 30,
+    "precision": 0.667,
+    "recall": 1.0,
+    "f1": 0.8,
+    "accuracy": 0.75
+  },
+  "per_scenario": {
+    "web_shell": {
+      "TP": 10,
+      "FP": 10,
+      "FN": 0,
+      "TN": 0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.667,
+      "accuracy": 0.5
+    },
+    "cron_persistence": {
+      "TP": 10,
+      "FP": 10,
+      "FN": 0,
+      "TN": 0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.667,
+      "accuracy": 0.5
+    },
+    "reverse_shell": {
+      "TP": 10,
+      "FP": 0,
+      "FN": 0,
+      "TN": 10,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "accuracy": 1.0
+    },
+    "base64_exec": {
+      "TP": 10,
+      "FP": 10,
+      "FN": 0,
+      "TN": 0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.667,
+      "accuracy": 0.5
+    },
+    "port_scan": {
+      "TP": 10,
+      "FP": 0,
+      "FN": 0,
+      "TN": 10,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "accuracy": 1.0
+    },
+    "ssh_brute_force": {
+      "TP": 10,
+      "FP": 0,
+      "FN": 0,
+      "TN": 10,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "accuracy": 1.0
+    }
+  }
+}

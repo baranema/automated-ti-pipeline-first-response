@@ -1,0 +1,11 @@
+{
+  "run": 40,
+  "scenario": "port_scan",
+  "ts": "2026-06-25T12:09:54.663631",
+  "total_s": 7.521,
+  "ansible_s": 4.087,
+  "rc": 0,
+  "detection_s": 2.876,
+  "response_s": 4.645,
+  "integrator_s": 0.558
+}

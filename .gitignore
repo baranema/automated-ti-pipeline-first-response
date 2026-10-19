@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+*.bak
+*.bak.*
+runtime/
+*.log
+.DS_Store
+
+# Latency result files at the repo root are scratch output; the curated
+# experiment evidence lives under results/ and is committed deliberately.
+/*_results.txt
+!results/*_results.txt

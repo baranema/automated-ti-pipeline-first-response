@@ -1,0 +1,32 @@
+---
+# Enable Wazuh realtime FIM on the Apache web root and create the quarantine
+# directory the response uses (web shell upload detection).
+- name: Configure FIM on web root for web shell detection
+  hosts: endpoint-webserver
+  gather_facts: false
+  tasks:
+    - name: Add web root FIM monitoring to Wazuh agent
+      ansible.builtin.blockinfile:
+        path: /var/ossec/etc/ossec.conf
+        marker: "<!-- {mark} ti-pipeline web root FIM -->"
+        insertbefore: "</ossec_config>"
+        block: |
+          <syscheck>
+            <directories check_all="yes" realtime="yes"
+              report_changes="yes">/var/www/html</directories>
+          </syscheck>
+      notify: restart wazuh-agent
+
+    - name: Create quarantine directory
+      ansible.builtin.file:
+        path: /var/quarantine
+        state: directory
+        mode: "0700"
+        owner: root
+        group: root
+
+  handlers:
+    - name: restart wazuh-agent
+      ansible.builtin.service:
+        name: wazuh-agent
+        state: restarted
