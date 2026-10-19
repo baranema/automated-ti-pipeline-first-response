@@ -2,7 +2,7 @@
 
 This project is an automated first-response pipeline: Wazuh detects an attack, a small Python script picks the response, and Ansible applies it over SSH - with no human in the loop. It covers six attack scenarios, each detected and remediated in seconds.
 
-The full thesis report is in [`report/Emilija_Baranauskaite_Automated_TI_Pipeline_for_First_Response.pdf`](report/Emilija_Baranauskaite_Automated_TI_Pipeline_for_First_Response.pdf).
+The full thesis report is in [`Emilija_Baranauskaite_Automated_TI_Pipeline_for_First_Response.pdf`](Emilija_Baranauskaite_Automated_TI_Pipeline_for_First_Response.pdf).
 
 ## How it works
 
@@ -40,7 +40,7 @@ results/                   measurement data, JSON + text
 install_on_controller.sh   wires the pipeline into Wazuh (run on the controller)
 ansible.cfg                Ansible defaults (SSH handling, inventory path)
 requirements.txt           the one Python dependency (PyYAML)
-report/                    the thesis report (PDF)
+Emilija_...Response.pdf    the thesis report (PDF)
 ```
 
 ---
